@@ -12,7 +12,7 @@
 </html>
 -->
 {% if submitted %}
-   <p class="success">
+   <p class="success" style="font-family:'didot'">
      Your submission was successful.
    </p>
     <!--
@@ -50,25 +50,26 @@
                 break;
             }
         } */
-        /*
-        if (decoded_vol_name.equals('none')) {
-            document.write("You have been matched with " + decoded_vol_name + ", who will meet you at " + decodeURIComponent(pickup_loc) + " on " + pickup_time + ".");
+        //if (current_url.substring(vol_name_start_ind, pickup_loc_start_ind-1) == 'none') {
+        if (decoded_vol_name == 'none') {
+            document.write("<p id=\'jstext\' style=\'font-family:\"didot\"\'>" + "Unfortunately, there are no volunteers available for the time and location you specified." + '</p>');
         }
         else {
-            document.write("Unfortunately, there are no volunteers available for the location and time you specified.")
-        } */
-        document.write("Your volunteer chaperone is " + decoded_vol_name + ", who will meet you at " + pickup_loc + " on " + pickup_time + ".");
+            document.write("<p id=\'jstext\' style=\'font-family:\"didot\"\'>" + "Your volunteer chaperone is " + decoded_vol_name + ", who will meet you at " + pickup_loc + " on " + pickup_time.substring(0,10) + " at " + pickup_time.substring(11) + "." + '</p>');
+        }
+        //document.write("<p id=\'jstext\' style=\'font-family:\"didot\"\'>" + "Your volunteer chaperone is " + decoded_vol_name + ", who will meet you at " + pickup_loc + " on " + pickup_time.substring(0,10) + " at " + pickup_time.substring(11) + "." + '</p>');
     </script>
 
  {% else %}
-   <h2>Request a volunteer to chaperone your walk: </h2>
+   <h2 style="font-family:'didot'">Request a volunteer to chaperone your walk: </h2>
+    <p style="font-family:'didot'">Note: Please enter Pickup Date/Time in the format YYYY-MM-DD HH:MM:SS.</p>
 
    <form action="" method="post" novalidate>
-   <table>
+   <table style="border: 1px solid black; background-color:#add8e6; font-family:'didot';">
      {{ form.as_table }}
      <tr>
        <td>&nbsp;</td>
-       <td><input type="submit" value="Submit"></td>
+       <td><input type="submit" value="Submit" style="font-family:'didot'"></td>
      </tr>
    </table>
    {% csrf_token %}
