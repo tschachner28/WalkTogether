@@ -5,7 +5,7 @@ from django.db import models
 
 class SiteAdmin(admin.ModelAdmin):
     #fields = ["first_name", "last_name", "student_id", "email", "grade", "submitted", "submitted_date", "stress_rating", "daily_ratings"]
-    fields = ["first_name", "last_name", "location"]
+    fields = ["first_name", "last_name", "location", "times_available", "phone_number"]
 
     formfield_overrides = {models.TextField: {'widget': TinyMCE()}}
 

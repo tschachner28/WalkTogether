@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,3 +10,67 @@
 
 </body>
 </html>
+-->
+{% if submitted %}
+   <p class="success">
+     Your submission was successful.
+   </p>
+    <!--
+    <p class="success">
+     You have been matched with Volunteer.objects.get(id=vid)
+   </p>
+   -->
+    <script>
+        var current_url = window.location.href;
+        //var vol_id_ind = current_url.indexOf("vid");
+        //var vol_id = current_url.substring(vol_id_ind);
+        //var all_volunteers = list(Volunteer.objects.all());
+        var vol_name_start_ind = current_url.indexOf("vname") + 6;
+        var pickup_loc_start_ind = current_url.indexOf("pickuploc") + 10;
+        var pickup_time_start_ind = current_url.indexOf("pickuptime") + 11;
+        var vol_name = current_url.substring(vol_name_start_ind, pickup_loc_start_ind-11);
+        var decoded_vol_name = decodeURIComponent(vol_name);
+        var encoded_pickup_loc = current_url.substring(pickup_loc_start_ind, pickup_time_start_ind-12);
+        var decoded_pickup_loc = decodeURIComponent(encoded_pickup_loc);
+        var pickup_loc = decoded_pickup_loc.split('+').join(' ');
+        //var decoded_pickup_loc = decodeURIComponent((pickup_loc+'').replace(/\+/g, '%20'));
+        var encoded_pickup_time = current_url.substring(pickup_time_start_ind);
+        var decoded_pickup_time = decodeURIComponent(encoded_pickup_time);
+        var pickup_time = decoded_pickup_time.split("%3A").join(":");
+        pickup_time = pickup_time.split("+").join(" ").substring(0,19);
+        /*
+        for (var i = 0; i < all_volunteers.length; i++)
+        {
+            if (str(all_volunteers[i].id).equals(vol_id)) {
+                document.write("You have been matched with " + all_volunteers[i].first_name);
+                break;
+            }
+            else if (i == all_volunteers.length - 1) {
+                document.write("No volunteers near your location have been found.");
+                break;
+            }
+        } */
+        /*
+        if (decoded_vol_name.equals('none')) {
+            document.write("You have been matched with " + decoded_vol_name + ", who will meet you at " + decodeURIComponent(pickup_loc) + " on " + pickup_time + ".");
+        }
+        else {
+            document.write("Unfortunately, there are no volunteers available for the location and time you specified.")
+        } */
+        document.write("Your volunteer chaperone is " + decoded_vol_name + ", who will meet you at " + pickup_loc + " on " + pickup_time + ".");
+    </script>
+
+ {% else %}
+   <h2>Request a volunteer to chaperone your walk: </h2>
+
+   <form action="" method="post" novalidate>
+   <table>
+     {{ form.as_table }}
+     <tr>
+       <td>&nbsp;</td>
+       <td><input type="submit" value="Submit"></td>
+     </tr>
+   </table>
+   {% csrf_token %}
+   </form>
+ {% endif %}
