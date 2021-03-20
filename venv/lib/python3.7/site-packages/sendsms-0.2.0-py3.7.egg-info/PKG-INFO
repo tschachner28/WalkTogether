@@ -1,0 +1,12 @@
+Metadata-Version: 1.1
+Name: sendsms
+Version: 0.2.0
+Summary: Send an SMS message
+Home-page: https://github.com/jamesbvaughan/sendsms
+Author: James Vaughan
+Author-email: james@jamesbvaughan.com
+License: MIT
+Download-URL: https://github.com/jamesbvaughan/sendsms/tarball/0.2
+Description: UNKNOWN
+Keywords: sms text command line message twilio phone
+Platform: UNKNOWN

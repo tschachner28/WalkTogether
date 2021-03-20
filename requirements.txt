@@ -1,3 +1,7 @@
 django
 django-tinymce
 geopy
+django-sms-gateway
+django-sendsms
+sendsms
+django-simple-sms

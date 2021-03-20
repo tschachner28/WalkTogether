@@ -1,0 +1,14 @@
+LICENSE
+MANIFEST.in
+config.sample
+readme.md
+setup.cfg
+setup.py
+sendsms/__init__.py
+sendsms/command_line.py
+sendsms.egg-info/PKG-INFO
+sendsms.egg-info/SOURCES.txt
+sendsms.egg-info/dependency_links.txt
+sendsms.egg-info/entry_points.txt
+sendsms.egg-info/requires.txt
+sendsms.egg-info/top_level.txt
