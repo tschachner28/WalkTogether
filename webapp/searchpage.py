@@ -20,7 +20,7 @@ class SignupForm(forms.Form):
     last_name = forms.CharField(max_length=20, label='Last Name')
     phone_number = forms.IntegerField(label='Phone Number')
     pickup_time = forms.DateTimeField(label='Pickup Date/Time')
-    pickup_loc = forms.CharField(max_length=100, label='Pickup Location')
+    pickup_loc = forms.CharField(max_length=100, label='Pickup Address')
 
 
 def submission(request):
@@ -38,7 +38,15 @@ def submission(request):
             for vol in all_volunteers:
                 print(cd['pickup_loc'])
                 print(cd['pickup_time'])
-                if calc_distance(cd['pickup_loc'], vol.location) <= 10: # match with volunteer who is located <= 10 miles away and available during the specified time
+                vol_shifts = strip_tags(vol.walk_shifts).split(';')
+                invalid_match = False
+                for shift in vol_shifts:
+                    shift_time = datetime.datetime.strptime(shift.split(',')[3][1:20], '%Y-%m-%d %H:%M:%S')
+                    # Make sure vol doesn't have any other shifts < 60 minutes before or after the requested time
+                    if shift_time - cd['pickup_time'].replace(tzinfo=None) < datetime.timedelta(seconds=3600):
+                        invalid_match = True
+                        break
+                if not invalid_match and calc_distance(cd['pickup_loc'], vol.location) <= 10: # match with volunteer who is located <= 10 miles away and available during the specified time
                     vol_times_available = vol.times_available.split(' ')
                     print(vol_times_available)
                     i = 0
@@ -53,6 +61,8 @@ def submission(request):
                             '%Y-%m-%d %H:%M:%S')
                         print("start_time: " + str(start_time))
                         print("end_time: " + str(end_time))
+                        if cd['pickup_time'].replace(tzinfo=None) <= datetime.datetime.now(): #
+                            break
                         if start_time <= cd['pickup_time'].replace(tzinfo=None) <= end_time:
                             volunteer_match = vol
                             # Update volunteer model to reflect match

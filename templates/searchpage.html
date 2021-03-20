@@ -62,14 +62,14 @@
 
  {% else %}
    <h2 style="font-family:'didot'">Request a volunteer to chaperone your walk: </h2>
-    <p style="font-family:'didot'">Note: Please enter Pickup Date/Time in the format YYYY-MM-DD HH:MM:SS.</p>
+    <p style="font-family:'didot'">Note: Please enter Pickup Date/Time in the format YYYY-MM-DD HH:MM:SS (e.g. 2021-03-20 18:30:00).</p>
 
    <form action="" method="post" novalidate>
    <table style="border: 1px solid black; background-color:#add8e6; font-family:'didot';">
      {{ form.as_table }}
      <tr>
        <td>&nbsp;</td>
-       <td><input type="submit" value="Submit" style="font-family:'didot'"></td>
+       <td><input type="submit" value="Match Me with a Chaperone" style="font-family:'didot'"></td>
      </tr>
    </table>
    {% csrf_token %}
